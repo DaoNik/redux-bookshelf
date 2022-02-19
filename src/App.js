@@ -9,7 +9,19 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route exact path='/' element={<Main />} />
+        <Route
+          exact
+          path='/'
+          element={
+            <Main
+              cards={[
+                { value: 1, id: 1 },
+                { value: 2, id: 2 },
+                { value: 3, id: 3 },
+              ]}
+            />
+          }
+        />
         <Route path='/:cardId' element={<ViewCard />} />
       </Routes>
       <Footer />
