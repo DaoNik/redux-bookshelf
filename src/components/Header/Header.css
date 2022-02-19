@@ -1,0 +1,44 @@
+.header {
+  background-image: url('../../images/bookshelfs.jpeg');
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  min-height: 200px;
+  padding: 0;
+  padding-top: 30px;
+  box-sizing: border-box;
+  color: white;
+}
+
+.header__title {
+  margin: 0;
+}
+
+.form__search {
+  display: flex;
+  max-width: 400px;
+  width: 90%;
+  margin: 15px auto;
+}
+
+.form__filter {
+  display: flex;
+  margin: 0 auto;
+  max-width: 500px;
+  justify-content: space-around;
+}
+
+.input-search {
+  width: 90%;
+}
+
+.input-search-btn {
+  width: 10%;
+  border: 1px solid rgb(118, 118, 118);
+  border-radius: 5%;
+  border-left: none;
+  background-color: white;
+  background-image: url('../../images/search.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}
