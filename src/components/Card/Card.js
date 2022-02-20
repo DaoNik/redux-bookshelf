@@ -13,7 +13,6 @@ function Card({ card }) {
 
   function checkAuthors() {
     let newAuthors = '';
-    console.log(authors);
     if (Array.isArray(authors) && authors.length > 1) {
       authors.forEach((author) => {
         if (author !== authors[authors.length - 1]) {

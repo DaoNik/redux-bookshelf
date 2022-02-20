@@ -1,24 +1,25 @@
 import React from 'react';
 import './Main.css';
 import FetchedBooks from '../FetchedBooks';
-import { useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { fetchBooks } from '../../redux/actions';
 
-function Main() {
+function Main({ cards }) {
   const dispatch = useDispatch();
-  const cards = useSelector((state) => state.books.books);
+  // const cards = useSelector((state) => state.books.books);
   const query = 'all';
   const orderBy = 'relevance';
+  let startIndex = cards.length;
 
   return (
     <main className='main-content'>
       <h2 className='cards-length'>Found {cards.length} results</h2>
       <ul className='cards'>
-        <FetchedBooks />
+        <FetchedBooks cards={cards} />
       </ul>
       <button
         className='btn btn-primary btn-add-card'
-        onClick={() => dispatch(fetchBooks(query, orderBy))}
+        onClick={() => dispatch(fetchBooks({ query, orderBy, startIndex }))}
       >
         Добавить книг
       </button>
@@ -26,11 +27,11 @@ function Main() {
   );
 }
 
-// const mapStateToProps = (state) => {
-//   console.log(state);
-//   return {
-//     fetchedBooks: state.posts.fetchedBooks,
-//   };
-// };
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    cards: state.books.books,
+  };
+};
 
-export default Main;
+export default connect(mapStateToProps, null)(Main);
