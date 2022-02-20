@@ -3,17 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import './Card.css';
 
 function Card({ card }) {
+  const navigate = useNavigate();
   const {
     categories = 'All',
     title = 'No Title',
     authors = 'No Author',
   } = card.volumeInfo;
   const { smallThumbnail: image } = card.volumeInfo.imageLinks ?? '';
-  const navigate = useNavigate();
-
-  function handleCardClick() {
-    navigate(`/${card.id}`);
-  }
 
   function checkAuthors() {
     let newAuthors = '';
@@ -31,13 +27,19 @@ function Card({ card }) {
     }
   }
 
+  const newAuthors = checkAuthors();
+
+  function handleCardClick() {
+    navigate(`/${card.id}`);
+  }
+
   return (
     <li onClick={handleCardClick} className='card' style={{ width: '18rem' }}>
       <img src={image} className='card-img-top card-image' alt={title}></img>
       <div className='card-body'>
-        <a className='card-link'>{categories}</a>
+        <p className='card-link'>{categories}</p>
         <h5 className='card-title'>{title}</h5>
-        <p className='card-text'>{checkAuthors()}</p>
+        <p className='card-text'>{newAuthors}</p>
       </div>
     </li>
   );

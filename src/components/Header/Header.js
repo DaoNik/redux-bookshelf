@@ -1,10 +1,12 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 import { fetchBooks, changeQueries } from '../../redux/actions';
 import { connect, useDispatch } from 'react-redux';
 
 function Header({ queries }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   function handleInputSearch(e) {
     dispatch(changeQueries({ ...queries, query: e.target.value }));
@@ -20,6 +22,7 @@ function Header({ queries }) {
 
   function handleSearch(event) {
     event.preventDefault();
+    navigate('/');
     dispatch(fetchBooks({ ...queries, startIndex: 0, isNewBook: true }));
   }
 
