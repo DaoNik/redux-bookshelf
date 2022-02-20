@@ -1,11 +1,12 @@
 import React from 'react';
 import Card from '../Card/Card';
+import './Main.css';
 
 function Main({ cards }) {
   return (
-    <main>
-      <h1>Main</h1>
-      <ul>
+    <main className='main-content'>
+      <h2 className='cards-length'>Found {cards.length} results</h2>
+      <ul className='cards'>
         {cards.map((card) => {
           return <Card key={card.id} card={card} />;
         })}

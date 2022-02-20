@@ -1,0 +1,25 @@
+.card {
+  margin-bottom: 10px;
+  background-color: rgb(242, 242, 242);
+  cursor: pointer;
+}
+
+.card-image {
+  box-sizing: border-box;
+  max-width: 100%;
+  height: 350px;
+}
+
+.card-link {
+  border: none;
+  text-decoration: underline;
+  color: rgb(190, 190, 190);
+}
+
+.card-link:hover {
+  color: rgb(150, 150, 150);
+}
+
+.card-title {
+  margin-top: 5px;
+}
