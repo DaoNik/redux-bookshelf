@@ -1,39 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Header.css';
 import { fetchBooks, changeQueries } from '../../redux/actions';
 import { connect, useDispatch } from 'react-redux';
 
-function Header({ cards, queries }) {
-  const [search, setSearch] = useState('');
-  const [filterCategories, setFilterCategories] = useState('all');
-  const [filterOrders, setFilterOrders] = useState('relevance');
+function Header({ queries }) {
   const dispatch = useDispatch();
 
   function handleInputSearch(e) {
-    setSearch(e.target.value);
-    changeQueries({ query: e.target.value, ...queries });
+    dispatch(changeQueries({ ...queries, query: e.target.value }));
   }
 
   function handleFilterCategories(e) {
-    setFilterCategories(e.target.value);
+    dispatch(changeQueries({ ...queries, filter: e.target.value }));
   }
 
   function handleFilterOrders(e) {
-    setFilterOrders(e.target.value);
+    dispatch(changeQueries({ ...queries, orderBy: e.target.value }));
   }
 
   function handleSearch(event) {
     event.preventDefault();
-
-    dispatch(
-      fetchBooks({
-        query: search,
-        filter: filterCategories,
-        orderBy: filterOrders,
-        startIndex: cards.length,
-        isNewBook: true,
-      })
-    );
+    dispatch(fetchBooks({ ...queries, startIndex: 0, isNewBook: true }));
   }
 
   return (
@@ -42,7 +29,6 @@ function Header({ cards, queries }) {
       <form onSubmit={handleSearch}>
         <div className='form__search'>
           <input
-            value={search}
             onChange={handleInputSearch}
             type='search'
             name='search'
@@ -56,7 +42,7 @@ function Header({ cards, queries }) {
             <select
               name='filterCategories'
               onChange={handleFilterCategories}
-              value={filterCategories}
+              defaultValue={'all'}
               className='form__select'
             >
               <option value='all'>all</option>
@@ -73,7 +59,7 @@ function Header({ cards, queries }) {
             <select
               name='filterOrders'
               onChange={handleFilterOrders}
-              value={filterOrders}
+              defaultValue={'relevance'}
               className='form__select'
             >
               <option value='relevance'>relevance</option>
@@ -89,7 +75,6 @@ function Header({ cards, queries }) {
 const mapStateToProps = (state) => {
   console.log(state);
   return {
-    cards: state.books.books,
     queries: state.books.queries,
   };
 };

@@ -4,10 +4,8 @@ import FetchedBooks from '../FetchedBooks';
 import { connect, useDispatch } from 'react-redux';
 import { fetchBooks } from '../../redux/actions';
 
-function Main({ cards }) {
+function Main({ cards, queries }) {
   const dispatch = useDispatch();
-  const query = 'all';
-  const orderBy = 'relevance';
 
   return (
     <main className='main-content'>
@@ -18,7 +16,7 @@ function Main({ cards }) {
       <button
         className='btn btn-primary btn-add-card'
         onClick={() =>
-          dispatch(fetchBooks({ query, orderBy, startIndex: cards.length }))
+          dispatch(fetchBooks({ ...queries, startIndex: cards.length }))
         }
       >
         Добавить книг
@@ -31,6 +29,7 @@ const mapStateToProps = (state) => {
   console.log(state);
   return {
     cards: state.books.books,
+    queries: state.books.queries,
   };
 };
 

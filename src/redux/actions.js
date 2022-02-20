@@ -1,6 +1,7 @@
 import { CHANGE_QUERIES, FETCH_BOOKS, NEW_FETCH_BOOKS } from './types';
 
 export function changeQueries(newQueries) {
+  console.log(newQueries);
   return {
     type: CHANGE_QUERIES,
     payload: newQueries,
@@ -16,7 +17,7 @@ export function fetchBooks({ query, orderBy, startIndex, filter, isNewBook }) {
       // dispatch(showLoader());
       console.log(startIndex);
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&${filter}&startIndex=${startIndex}&orderBy=${orderBy}&maxResults=30&key=AIzaSyDm7BoTRuvNX7gL2-rCUdMaVE8buxJxSyM`
+        `https://www.googleapis.com/books/v1/volumes?q=${query}&categories:${filter}&startIndex=${startIndex}&orderBy=${orderBy}&maxResults=30&key=AIzaSyDm7BoTRuvNX7gL2-rCUdMaVE8buxJxSyM`
       );
       const json = await response.json();
       dispatch({
