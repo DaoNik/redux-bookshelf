@@ -1,1 +1,2 @@
+export const START_FETCH_BOOKS = 'POST/START_FETCH_BOOKS';
 export const FETCH_BOOKS = 'POST/FETCH_BOOKS';
