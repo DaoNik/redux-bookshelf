@@ -1,19 +1,64 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Header.css';
+import { fetchBooks, changeQueries } from '../../redux/actions';
+import { connect, useDispatch } from 'react-redux';
 
-function Header() {
+function Header({ cards, queries }) {
+  const [search, setSearch] = useState('');
+  const [filterCategories, setFilterCategories] = useState('all');
+  const [filterOrders, setFilterOrders] = useState('relevance');
+  const dispatch = useDispatch();
+
+  function handleInputSearch(e) {
+    setSearch(e.target.value);
+    changeQueries({ query: e.target.value, ...queries });
+  }
+
+  function handleFilterCategories(e) {
+    setFilterCategories(e.target.value);
+  }
+
+  function handleFilterOrders(e) {
+    setFilterOrders(e.target.value);
+  }
+
+  function handleSearch(event) {
+    event.preventDefault();
+
+    dispatch(
+      fetchBooks({
+        query: search,
+        filter: filterCategories,
+        orderBy: filterOrders,
+        startIndex: cards.length,
+        isNewBook: true,
+      })
+    );
+  }
+
   return (
     <header className='header'>
       <h1 className='header__title'>Search for books</h1>
-      <form>
+      <form onSubmit={handleSearch}>
         <div className='form__search'>
-          <input type='search' name='search' className='input-search' />
-          <button className='input-search-btn'></button>
+          <input
+            value={search}
+            onChange={handleInputSearch}
+            type='search'
+            name='search'
+            className='input-search'
+          />
+          <button type='submit' className='input-search-btn'></button>
         </div>
         <div className='form__filter'>
           <label>
             Categories
-            <select defaultValue={'all'} className='form__select'>
+            <select
+              name='filterCategories'
+              onChange={handleFilterCategories}
+              value={filterCategories}
+              className='form__select'
+            >
               <option value='all'>all</option>
               <option value='art'>art</option>
               <option value='biography'>biography</option>
@@ -25,7 +70,12 @@ function Header() {
           </label>
           <label>
             Sorting by
-            <select defaultValue={'relevance'} className='form__select'>
+            <select
+              name='filterOrders'
+              onChange={handleFilterOrders}
+              value={filterOrders}
+              className='form__select'
+            >
               <option value='relevance'>relevance</option>
               <option value='newest'>newest</option>
             </select>
@@ -36,4 +86,12 @@ function Header() {
   );
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    cards: state.books.books,
+    queries: state.books.queries,
+  };
+};
+
+export default connect(mapStateToProps, null)(Header);

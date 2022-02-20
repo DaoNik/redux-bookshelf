@@ -3,8 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import './Card.css';
 
 function Card({ card }) {
-  const { categories = 'All', title, authors = 'No Author' } = card.volumeInfo;
-  const { smallThumbnail: image } = card.volumeInfo.imageLinks;
+  const {
+    categories = 'All',
+    title = 'No Title',
+    authors = 'No Author',
+  } = card.volumeInfo;
+  const { smallThumbnail: image } = card.volumeInfo.imageLinks ?? '';
   const navigate = useNavigate();
 
   function handleCardClick() {

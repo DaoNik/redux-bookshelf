@@ -1,15 +1,13 @@
 import React from 'react';
 import './Main.css';
 import FetchedBooks from '../FetchedBooks';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { fetchBooks } from '../../redux/actions';
 
 function Main({ cards }) {
   const dispatch = useDispatch();
-  // const cards = useSelector((state) => state.books.books);
   const query = 'all';
   const orderBy = 'relevance';
-  let startIndex = cards.length;
 
   return (
     <main className='main-content'>
@@ -19,7 +17,9 @@ function Main({ cards }) {
       </ul>
       <button
         className='btn btn-primary btn-add-card'
-        onClick={() => dispatch(fetchBooks({ query, orderBy, startIndex }))}
+        onClick={() =>
+          dispatch(fetchBooks({ query, orderBy, startIndex: cards.length }))
+        }
       >
         Добавить книг
       </button>
