@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/DaoNik/redux-bookshelf/static/css/main.9a5f0433.css",
+    "main.js": "/DaoNik/redux-bookshelf/static/js/main.a5077353.js",
+    "static/media/bookshelfs.jpeg": "/DaoNik/redux-bookshelf/static/media/bookshelfs.4257a2232ff44540e7ce.jpeg",
+    "index.html": "/DaoNik/redux-bookshelf/index.html",
+    "static/media/search.svg": "/DaoNik/redux-bookshelf/static/media/search.66f944388952b50b56f3.svg",
+    "main.9a5f0433.css.map": "/DaoNik/redux-bookshelf/static/css/main.9a5f0433.css.map",
+    "main.a5077353.js.map": "/DaoNik/redux-bookshelf/static/js/main.a5077353.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a5f0433.css",
+    "static/js/main.a5077353.js"
+  ]
+}
